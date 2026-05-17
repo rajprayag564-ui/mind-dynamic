@@ -3,8 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import { Dialog, Transition } from "@headlessui/react";
 
 export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [open, setOpen] = useState(false);
@@ -108,49 +109,96 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
           </div>
         </div>
 
-        {open ? (
-          <div className="absolute left-4 right-4 top-16 z-50 rounded-xl bg-[#071033] p-4 shadow-lg md:hidden">
-            <div className="flex flex-col gap-3">
-              {links.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="block rounded-md px-3 py-2 text-sm text-blue-100 hover:bg-white/5"
-                >
-                  {link.label}
-                </Link>
-              ))}
+        <Transition show={open} as={Fragment}>
+          <Dialog as="div" className="relative z-50 md:hidden" onClose={setOpen}>
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <div className="fixed inset-0 bg-black/40" />
+            </Transition.Child>
 
-              {isLoggedIn ? (
-                <>
-                  <Link href="/dashboard" className="block rounded-md px-3 py-2 text-sm text-white bg-white/5">
-                    Dashboard
-                  </Link>
-                  <Link href="/logout" className="block rounded-md px-3 py-2 text-sm text-white bg-blue-600">
-                    Logout
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link href="/login" className="block rounded-md px-3 py-2 text-sm text-white bg-white/5">
-                    Login
-                  </Link>
-                  <Link href="/enroll" className="block rounded-md px-3 py-2 text-sm text-white bg-blue-600">
-                    Enroll Now
-                  </Link>
-                  <a
-                    href="https://wa.me/918889935635?text=Hello%20I%20am%20interested%20in%20the%20Dynamic%20Fast%20Mind%20course"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block rounded-md px-3 py-2 text-sm text-green-400"
+            <div className="fixed inset-0 overflow-hidden">
+              <div className="absolute inset-0 overflow-hidden">
+                <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+                  <Transition.Child
+                    as={Fragment}
+                    enter="transform transition ease-in-out duration-300"
+                    enterFrom="translate-x-full"
+                    enterTo="translate-x-0"
+                    leave="transform transition ease-in-out duration-300"
+                    leaveFrom="translate-x-0"
+                    leaveTo="translate-x-full"
                   >
-                    Message/WhatsApp
-                  </a>
-                </>
-              )}
+                    <Dialog.Panel className="pointer-events-auto w-screen max-w-xs">
+                      <div className="flex h-full flex-col overflow-y-auto bg-[#071033] py-6 shadow-xl">
+                        <div className="px-4 sm:px-6">
+                          <div className="flex items-start justify-between">
+                            <h2 className="text-lg font-semibold text-white">Menu</h2>
+                            <div className="ml-3 flex h-7 items-center">
+                              <button
+                                onClick={() => setOpen(false)}
+                                className="rounded-md bg-white/5 p-1 text-white hover:bg-white/10"
+                              >
+                                Close
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="mt-6 relative flex-1 px-4 sm:px-6">
+                          <div className="flex flex-col gap-3">
+                            {links.map((link) => (
+                              <Link
+                                key={link.href}
+                                href={link.href}
+                                className="block rounded-md px-3 py-2 text-sm text-blue-100 hover:bg-white/5"
+                              >
+                                {link.label}
+                              </Link>
+                            ))}
+
+                            {isLoggedIn ? (
+                              <>
+                                <Link href="/dashboard" className="block rounded-md px-3 py-2 text-sm text-white bg-white/5">
+                                  Dashboard
+                                </Link>
+                                <Link href="/logout" className="block rounded-md px-3 py-2 text-sm text-white bg-blue-600">
+                                  Logout
+                                </Link>
+                              </>
+                            ) : (
+                              <>
+                                <Link href="/login" className="block rounded-md px-3 py-2 text-sm text-white bg-white/5">
+                                  Login
+                                </Link>
+                                <Link href="/enroll" className="block rounded-md px-3 py-2 text-sm text-white bg-blue-600">
+                                  Enroll Now
+                                </Link>
+                                <a
+                                  href="https://wa.me/918889935635?text=Hello%20I%20am%20interested%20in%20the%20Dynamic%20Fast%20Mind%20course"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="block rounded-md px-3 py-2 text-sm text-green-400"
+                                >
+                                  Message/WhatsApp
+                                </a>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </Dialog.Panel>
+                  </Transition.Child>
+                </div>
+              </div>
             </div>
-          </div>
-        ) : null}
+          </Dialog>
+        </Transition>
       </nav>
     </header>
   );

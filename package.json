@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.10",
     "@radix-ui/react-dialog": "^1.1.15",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",

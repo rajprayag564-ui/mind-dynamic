@@ -52,7 +52,7 @@ export default function LoginPage() {
         } else {
           await fetch("/api/auth/session", { method: "POST" });
         }
-      } catch (e) {
+      } catch {
         await fetch("/api/auth/session", { method: "POST" });
       }
 
@@ -86,7 +86,7 @@ export default function LoginPage() {
         } else {
           await fetch("/api/auth/session", { method: "POST" });
         }
-      } catch (e) {
+      } catch {
         await fetch("/api/auth/session", { method: "POST" });
       }
       router.push(nextPath);

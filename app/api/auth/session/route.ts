@@ -4,12 +4,16 @@ import { NextResponse } from "next/server";
 // the environment variable `GOOGLE_APPLICATION_CREDENTIALS` to point to a
 // service account JSON file (do NOT commit that file to the repo).
 // Example: export GOOGLE_APPLICATION_CREDENTIALS="./serviceAccountKey.json"
+// Allow a loosely-typed admin reference because the Admin SDK is imported
+// dynamically only on the server to avoid bundling it into client code.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let admin: any = null;
 try {
   // require only when available to avoid bundling on the client
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  // allow the dynamic require here
+  // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports
   admin = require("firebase-admin");
-} catch (e) {
+} catch {
   admin = null;
 }
 
@@ -29,8 +33,8 @@ async function ensureAdminInitialized() {
     try {
       admin.initializeApp({ credential: admin.credential.applicationDefault() });
       return true;
-    } catch (e) {
-      console.warn('Firebase Admin applicationDefault init failed', e);
+    } catch {
+      console.warn('Firebase Admin applicationDefault init failed');
     }
   } catch (err) {
     console.error('Failed to initialize Firebase Admin:', err);

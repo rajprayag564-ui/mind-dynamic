@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [open, setOpen] = useState(false);
@@ -91,14 +92,20 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
           )}
         </div>
 
-        <div className="flex items-center md:hidden">
-          <button
-            onClick={() => setOpen((s) => !s)}
-            aria-label="Toggle menu"
-            className="rounded-md bg-white/5 p-2 text-blue-100 hover:bg-white/10"
-          >
-            {open ? "✕" : "☰"}
-          </button>
+        <div className="flex items-center gap-2 md:gap-4">
+          <div className="hidden md:block">
+            <ThemeToggle />
+          </div>
+          <div className="flex items-center md:hidden">
+            <ThemeToggle />
+            <button
+              onClick={() => setOpen((s) => !s)}
+              aria-label="Toggle menu"
+              className="ml-2 rounded-md bg-white/5 p-2 text-blue-100 hover:bg-white/10"
+            >
+              {open ? "✕" : "☰"}
+            </button>
+          </div>
         </div>
 
         {open ? (

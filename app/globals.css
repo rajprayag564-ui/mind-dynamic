@@ -7,15 +7,32 @@
   --color-accent: #3b82f6;
 }
 
+/* Light theme variables */
+:root[data-theme="light"] {
+  --color-bg: #f8fafc;
+  --color-accent: #2563eb;
+}
+
+/* Dark theme variables */
+:root[data-theme="dark"] {
+  --color-bg: #0a0f2c;
+  --color-accent: #3b82f6;
+}
+
 html,
 body {
   scroll-behavior: smooth;
 }
 
 body {
-  background: radial-gradient(circle at 20% 0%, #13266e 0%, #0a0f2c 45%);
-  color: #ffffff;
+  background: radial-gradient(circle at 20% 0%, #13266e 0%, var(--color-bg) 45%);
+  color: var(--color-text, #ffffff);
   font-family: var(--font-inter), sans-serif;
+}
+
+/* Light theme overrides */
+:root[data-theme="light"] body {
+  --color-text: #0b1220;
 }
 
 .animate-fade-up {

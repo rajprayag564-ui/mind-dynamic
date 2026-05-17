@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Dynamic Fast Mind | Learn Fast. Think Dynamic.",
   description:
     "A premium single-program learning funnel for Dynamic Fast Mind.",
+  viewport: 'width=device-width, initial-scale=1',
 };
 
 export default function RootLayout({

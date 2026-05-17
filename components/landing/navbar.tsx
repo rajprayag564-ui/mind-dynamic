@@ -13,13 +13,13 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0A0F2C]/90 backdrop-blur">
-      <nav className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
+      <nav className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between px-4 py-3 sm:px-6">
         <Link href="/" className="flex items-center gap-3">
           <img src="/logo-mark.svg" alt="DFM" className="h-10 w-10" />
           <img src="/logo.svg" alt="Dynamic Fast Mind" className="hidden h-8 md:block" />
         </Link>
 
-        <div className="flex items-center gap-5 text-sm text-blue-100">
+        <div className="flex flex-wrap items-center gap-3 text-sm text-blue-100">
           {links.map((link) => (
             <Link key={link.href} href={link.href} className="transition hover:text-white">
               {link.label}

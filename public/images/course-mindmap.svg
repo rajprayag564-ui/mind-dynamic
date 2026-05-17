@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420">
+  <rect width="100%" height="100%" rx="20" fill="#07112a"/>
+  <g transform="translate(40,40)">
+    <rect x="0" y="0" width="240" height="160" rx="10" fill="#0b1226"/>
+    <rect x="260" y="0" width="400" height="320" rx="12" fill="#03102a"/>
+    <text x="12" y="140" fill="#9fe8ff" font-size="26" font-family="Inter">Mind Map</text>
+  </g>
+</svg>

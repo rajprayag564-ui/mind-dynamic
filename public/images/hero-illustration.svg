@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="hG" x1="0" x2="1"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#06B6D4"/></linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="#07112a"/>
+  <g transform="translate(120,80)">
+    <rect x="0" y="0" width="720" height="520" rx="28" fill="url(#hG)" opacity="0.14"/>
+    <g transform="translate(40,40)">
+      <circle cx="120" cy="120" r="100" fill="#0ea5a4" opacity="0.12"/>
+      <rect x="320" y="40" width="300" height="360" rx="18" fill="#0b1226" stroke="#1e293b"/>
+      <rect x="20" y="220" width="250" height="180" rx="12" fill="#0b1226" stroke="#1e293b"/>
+      <text x="40" y="320" fill="#dbeafe" font-size="28" font-family="Inter, Arial">Study faster, remember longer</text>
+    </g>
+  </g>
+</svg>

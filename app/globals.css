@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #0a0f2c;
+  --color-accent: #3b82f6;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: radial-gradient(circle at 20% 0%, #13266e 0%, #0a0f2c 45%);
+  color: #ffffff;
+  font-family: var(--font-inter), sans-serif;
+}
+
+.animate-fade-up {
+  animation: fadeUp 600ms ease-out both;
+}
+
+.animate-float {
+  animation: floatUpDown 5s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatUpDown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}

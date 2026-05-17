@@ -25,13 +25,13 @@ export function HeroSection({ course }: HeroSectionProps) {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/enroll"
-              className="rounded-lg bg-[#3B82F6] px-6 py-3 text-center font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-500"
+              className="btn-primary"
             >
               Unlock the Training
             </Link>
             <Link
               href="/courses"
-              className="rounded-lg border border-white/30 px-6 py-3 text-center font-semibold text-blue-50 transition hover:bg-white/10"
+              className="btn-ghost"
             >
               Explore Courses
             </Link>

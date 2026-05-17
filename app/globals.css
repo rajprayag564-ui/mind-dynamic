@@ -35,6 +35,32 @@ body {
   --color-text: #0b1220;
 }
 
+/* Premium typography and small micro-interactions */
+h1, h2, h3 {
+  letter-spacing: -0.01em;
+}
+
+.btn-primary {
+  @apply inline-block rounded-lg bg-[color:var(--color-accent)] text-white font-semibold px-6 py-3 transition-transform duration-200 transform-gpu;
+}
+
+.btn-primary:hover {
+  transform: translateY(-4px);
+}
+
+.btn-ghost {
+  @apply inline-block rounded-lg border border-white/20 text-blue-100 px-5 py-2 transition-colors duration-200;
+}
+
+/* subtle card lift */
+.card-raise {
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.card-raise:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(59,130,246,0.12);
+}
+
 .animate-fade-up {
   animation: fadeUp 600ms ease-out both;
 }

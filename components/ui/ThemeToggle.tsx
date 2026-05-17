@@ -18,7 +18,7 @@ export default function ThemeToggle() {
         localStorage.setItem("dfm_theme", initial);
         setTheme(initial);
       }
-    } catch (e) {
+    } catch {
       // ignore
     }
   }, []);
@@ -29,7 +29,7 @@ export default function ThemeToggle() {
     try {
       document.documentElement.setAttribute("data-theme", next);
       localStorage.setItem("dfm_theme", next);
-    } catch (e) {}
+    } catch {}
   }
 
   return (

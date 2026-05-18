@@ -4,19 +4,25 @@
 
 :root {
   --color-bg: #0a0f2c;
+  --color-bg-start: #13266e;
   --color-accent: #3b82f6;
+  --color-text: #ffffff;
 }
 
 /* Light theme variables */
 :root[data-theme="light"] {
   --color-bg: #f8fafc;
+  --color-bg-start: #e0edff;
   --color-accent: #2563eb;
+  --color-text: #0b1220;
 }
 
 /* Dark theme variables */
 :root[data-theme="dark"] {
   --color-bg: #0a0f2c;
+  --color-bg-start: #13266e;
   --color-accent: #3b82f6;
+  --color-text: #ffffff;
 }
 
 html,
@@ -25,14 +31,9 @@ body {
 }
 
 body {
-  background: radial-gradient(circle at 20% 0%, #13266e 0%, var(--color-bg) 45%);
-  color: var(--color-text, #ffffff);
+  background: radial-gradient(circle at 20% 0%, var(--color-bg-start) 0%, var(--color-bg) 45%);
+  color: var(--color-text);
   font-family: var(--font-inter), sans-serif;
-}
-
-/* Light theme overrides */
-:root[data-theme="light"] body {
-  --color-text: #0b1220;
 }
 
 /* Premium typography and small micro-interactions */

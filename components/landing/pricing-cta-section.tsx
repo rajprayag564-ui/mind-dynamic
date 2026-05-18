@@ -23,7 +23,7 @@ export function PricingCtaSection({ course }: PricingCtaSectionProps) {
         </div>
 
         <Link
-          href="/enroll"
+          href="/courses/powerful-public-speaking"
           className="mt-8 inline-flex w-full max-w-md justify-center rounded-xl bg-[#3B82F6] px-8 py-4 text-lg font-bold text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-500"
         >
           Buy Now

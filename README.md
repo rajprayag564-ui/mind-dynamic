@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+**DynamicMind**
 
-## Getting Started
+- **Project:** DynamicMind — marketing + course site built with Next.js and Tailwind CSS.
+- **Stack:** Next.js (app router), TypeScript, Tailwind CSS, Firebase (auth + client), Vercel for deployment.
 
-First, run the development server:
+**Getting Started**
+
+- **Install:**
+
+```bash
+npm install
+```
+
+- **Run (development):**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Build:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+npm start
+```
 
-## Learn More
+**Project layout (key folders)**
 
-To learn more about Next.js, take a look at the following resources:
+- `app/` — Next.js app routes and pages (use this to find pages like `login`, `dashboard`, `courses`).
+- `components/` — React UI components grouped by feature (landing, auth, contact, UI primitives).
+- `lib/` — Utility code and small data modules (see `lib/firebase` for Firebase setup).
+- `public/` — Static assets and images.
+- `scripts/` — helper scripts (e.g., `verify-env.js`).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Firebase**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Firebase helpers live in `lib/firebase/` (`auth.ts`, `client.ts`). Ensure the required environment variables are set before running (project credentials in Vercel or `.env.local`). Use `scripts/verify-env.js` to validate env vars.
 
-## Deploy on Vercel
+**Useful scripts**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `npm run dev` — run dev server at http://localhost:3000
+- `npm run build` — compile production build
+- `npm run start` — run production server locally
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Deployment**
+
+- This project is ready for Vercel. Configure environment variables in your Vercel project, then deploy from the repository.
+
+**Useful files**
+
+- `app/page.tsx` — landing page entry
+- `components/landing/navbar.tsx` — main navigation
+- `lib/firebase/client.ts` — Firebase client initialization
+
+**Contributing**
+
+- Fork, create a branch, make changes, and open a pull request. Add short, focused commits and a clear PR description.
+
+**Contact / Support**
+
+- For local setup issues or env var questions, see `scripts/verify-env.js` or contact the project maintainer.
+
+---
+
+**About**
+
+DynamicMind is a marketing and course-delivery site for online learning programs. The project combines a public-facing marketing site (landing pages, pricing, testimonials, contact) with a simple course delivery experience (enrollment, user dashboard, course access). The goal is to provide a lightweight, maintainable platform for launching online cohorts and delivering course content.
+
+**What we're building**
+
+- A responsive marketing site to attract students and collect leads (landing, pricing, contact forms).
+- Authentication and enrollment flows (sign up, enroll in a course, manage access).
+- A learner dashboard to access enrolled course content and track progress.
+- Admin/maintainer pages for managing course content and viewing enrollments (future).
+
+See [TARGET.md](TARGET.md) for the project target document: goals, audience, MVP scope, success metrics, and roadmap.
+
+If you'd like, I can also add a short Development Setup section (env examples), or create a separate `CONTRIBUTING.md` and `ENVIRONMENT.md` with exact env variable names and examples.

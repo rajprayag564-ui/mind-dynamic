@@ -61,14 +61,32 @@ export async function POST(request: Request) {
     const body = await request.json().catch(() => ({}));
     const idToken = body?.idToken;
 
-    if (idToken) {
-      if (!process.env.GOOGLE_APPLICATION_CREDENTIALS || !admin) {
-        return NextResponse.json({ ok: false, error: "Server not configured for token verification" }, { status: 500 });
-      }
+    if (!idToken) {
+      return NextResponse.json({ ok: false, error: "Missing idToken" }, { status: 400 });
+    }
 
-      const decoded = await verifyIdToken(idToken);
+    try {
+      const { getAuth, getFirestore } = await import("@/lib/firebase/admin");
+      const auth = getAuth();
+      const decoded = await auth.verifyIdToken(idToken);
       if (!decoded) {
         return NextResponse.json({ ok: false, error: "Invalid token" }, { status: 401 });
+      }
+
+      // Create or update users collection record
+      try {
+        const db = getFirestore();
+        await db.collection("users").doc(decoded.uid).set(
+          {
+            uid: decoded.uid,
+            email: decoded.email || null,
+            name: decoded.name || null,
+            updatedAt: new Date().toISOString(),
+          },
+          { merge: true }
+        );
+      } catch (e) {
+        console.warn("Failed to write user record:", e);
       }
 
       const response = NextResponse.json({ ok: true });
@@ -82,20 +100,10 @@ export async function POST(request: Request) {
         maxAge: 60 * 60 * 24 * 7,
       });
       return response;
+    } catch (err) {
+      console.error("Auth/session error:", err);
+      return NextResponse.json({ ok: false, error: "Server configuration error" }, { status: 500 });
     }
-
-    // Fallback for prototypes when no idToken provided
-    const response = NextResponse.json({ ok: true });
-    response.cookies.set({
-      name: "dfm_session",
-      value: "1",
-      httpOnly: true,
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-      maxAge: 60 * 60 * 24 * 7,
-    });
-    return response;
   } catch (err) {
     console.error(err);
     return NextResponse.json({ ok: false }, { status: 500 });

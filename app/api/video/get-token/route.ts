@@ -47,7 +47,8 @@ export async function POST(request: Request) {
     const token = signature;
 
     return NextResponse.json({ token, expires, libraryId, videoId });
-  } catch (err: any) {
-    return NextResponse.json({ message: err.message || String(err) }, { status: 500 });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    return NextResponse.json({ message: message || String(err) }, { status: 500 });
   }
 }

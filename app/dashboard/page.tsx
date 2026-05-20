@@ -13,7 +13,6 @@ export default async function DashboardPage() {
   // Get current user uid from cookie
   const uid = cookies().get("dfm_session")?.value || null;
   let isActive = false;
-  let isPending = false;
   let lastProductId: string | null = null;
 
   if (uid) {
@@ -25,10 +24,9 @@ export default async function DashboardPage() {
         const activePurchase = docs.find((purchase) => purchase.status === "active") || docs[0];
         const p = activePurchase;
         isActive = p.status === "active";
-        isPending = p.status === "pending";
         lastProductId = p.productId || null;
       }
-    } catch (e) {
+    } catch {
       // ignore errors; show locked state
     }
   }
@@ -74,7 +72,7 @@ export default async function DashboardPage() {
                   Mind Training
                 </h3>
                 <ul className="space-y-2">
-                  {mindLessons.map((lesson, index) => (
+                  {mindLessons.map((lesson) => (
                     <li
                       key={lesson.id}
                       className="flex items-center justify-between rounded-lg border border-white/10 bg-[#101943] px-4 py-3"

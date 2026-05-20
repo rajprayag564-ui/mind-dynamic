@@ -35,8 +35,9 @@ export default function CheckoutForm({ productId, title, amount }: Props) {
       const data = await res.json();
       // redirect to dashboard or thank you
       router.push(`/thank-you?purchaseId=${data.id}`);
-    } catch (err: any) {
-      setError(err.message || "Submission failed");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      setError(message || "Submission failed");
     } finally {
       setLoading(false);
     }

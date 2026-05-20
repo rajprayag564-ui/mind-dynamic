@@ -17,7 +17,7 @@ export default function CoursePage({ params }: Props) {
         <Navbar />
         <main className="mx-auto w-full max-w-4xl px-4 py-20">
           <h1 className="text-2xl font-bold">Course not found</h1>
-          <p className="mt-4">We couldn't find the course you requested.</p>
+          <p className="mt-4">We couldn&apos;t find the course you requested.</p>
         </main>
         <SiteFooter />
       </div>

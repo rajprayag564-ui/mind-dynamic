@@ -6,7 +6,7 @@ import { flagshipCourse } from "@/lib/course-data";
 
 export default function CoursesPage() {
   return (
-    <div className="min-h-screen bg-[#0A0F2C] text-white">
+    <div className="min-h-screen bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
       <Navbar />
 
       <main>

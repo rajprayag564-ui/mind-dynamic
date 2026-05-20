@@ -25,7 +25,7 @@ export default function ContactForm() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          className="mt-1 w-full rounded-lg border border-white/15 bg-[#08102a] px-3 py-2 text-white outline-none"
+              className="mt-1 w-full rounded-lg border border-[color:var(--color-text)]/15 bg-[color:var(--color-surface)] px-3 py-2 text-[color:var(--color-text)] outline-none"
           placeholder="Your name"
         />
       </div>
@@ -37,7 +37,7 @@ export default function ContactForm() {
           onChange={(e) => setEmail(e.target.value)}
           type="email"
           required
-          className="mt-1 w-full rounded-lg border border-white/15 bg-[#08102a] px-3 py-2 text-white outline-none"
+            className="mt-1 w-full rounded-lg border border-[color:var(--color-text)]/15 bg-[color:var(--color-surface)] px-3 py-2 text-[color:var(--color-text)] outline-none"
           placeholder="you@example.com"
         />
       </div>
@@ -48,7 +48,7 @@ export default function ContactForm() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           required
-          className="mt-1 w-full rounded-lg border border-white/15 bg-[#08102a] px-3 py-2 text-white outline-none"
+            className="mt-1 w-full rounded-lg border border-[color:var(--color-text)]/15 bg-[color:var(--color-surface)] px-3 py-2 text-[color:var(--color-text)] outline-none"
           rows={5}
           placeholder="Tell us what you need — course enquiry, consulting, live sessions..."
         />

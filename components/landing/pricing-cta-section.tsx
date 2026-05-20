@@ -19,12 +19,12 @@ export function PricingCtaSection({ course }: PricingCtaSectionProps) {
           <span className="text-lg text-blue-200 line-through">
             ₹{course.originalPriceInr}
           </span>
-          <span className="text-4xl font-extrabold text-white">₹{course.priceInr}</span>
+          <span className="text-4xl font-extrabold text-[color:var(--color-text)]">₹{course.priceInr}</span>
         </div>
 
         <Link
           href="/courses/powerful-public-speaking"
-          className="mt-8 inline-flex w-full max-w-md justify-center rounded-xl bg-[#3B82F6] px-8 py-4 text-lg font-bold text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-500"
+          className="mt-8 inline-flex w-full max-w-md justify-center rounded-xl bg-[color:var(--color-accent)] px-8 py-4 text-lg font-bold text-white shadow-lg shadow-blue-500/30 transition hover:opacity-90"
         >
           Buy Now
         </Link>

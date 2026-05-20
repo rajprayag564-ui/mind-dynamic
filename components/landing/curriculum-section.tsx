@@ -24,7 +24,7 @@ export function CurriculumSection({ course }: CurriculumSectionProps) {
           return (
             <article
               key={offer.id}
-              className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04]"
+              className="group overflow-hidden rounded-2xl border border-[color:var(--color-text)]/10 bg-[color:var(--color-surface)] transition-transform duration-200 hover:-translate-y-1 hover:shadow-lg"
             >
               <Image
                 src={offer.imageUrl}
@@ -42,7 +42,7 @@ export function CurriculumSection({ course }: CurriculumSectionProps) {
                 <h3 className="mt-3 text-xl font-semibold">{offer.title}</h3>
 
                 <div className="mt-4 flex items-end gap-3">
-                  <span className="text-2xl font-bold text-white">₹{offer.priceInr}</span>
+                  <span className="text-2xl font-bold text-[color:var(--color-text)]">₹{offer.priceInr}</span>
                   <span className="text-sm text-blue-200 line-through">
                     ₹{offer.originalPriceInr}
                   </span>
@@ -53,7 +53,7 @@ export function CurriculumSection({ course }: CurriculumSectionProps) {
 
                 <Link
                   href={`/courses/${offer.id}`}
-                  className="mt-5 inline-flex items-center gap-2 rounded-lg bg-[#3B82F6] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-500"
+                  className="mt-5 inline-flex items-center gap-2 rounded-lg bg-[color:var(--color-accent)] px-4 py-2.5 text-sm font-semibold text-white transition hover:opacity-90"
                 >
                   View Details
                   <ArrowRight className="h-4 w-4" />

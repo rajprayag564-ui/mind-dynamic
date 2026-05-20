@@ -7,7 +7,7 @@ export default function ContactPage() {
         <h1 className="text-3xl font-bold">Contact Dynamic Fast Mind</h1>
         <p className="mt-2 text-sm text-blue-200">Send a message and we will reach you on WhatsApp.</p>
 
-        <section className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+        <section className="mt-8 rounded-2xl border border-[color:var(--color-text)]/10 bg-[color:var(--color-surface)]/95 p-6">
           <ContactForm />
         </section>
       </main>

@@ -38,7 +38,7 @@ export function LearningModes() {
 
   return (
     <section className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-      <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
+      <div className="rounded-2xl border border-[color:var(--color-text)]/10 bg-[color:var(--color-surface)] p-6 sm:p-8">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-blue-200">
           Interactive Learning Modes
         </p>
@@ -52,8 +52,8 @@ export function LearningModes() {
               onClick={() => setActiveModeId(mode.id)}
               className={`rounded-full px-4 py-2 text-sm font-medium transition ${
                 activeModeId === mode.id
-                  ? "bg-[#3B82F6] text-white"
-                  : "bg-[#101943] text-blue-100 hover:bg-[#15235a]"
+                  ? "bg-[color:var(--color-accent)] text-white"
+                  : "bg-[color:var(--color-surface)] text-blue-100 hover:opacity-90"
               }`}
             >
               {mode.label}
@@ -61,7 +61,7 @@ export function LearningModes() {
           ))}
         </div>
 
-        <div className="mt-6 rounded-xl border border-white/10 bg-[#0d153a] p-5 animate-fade-up">
+        <div className="mt-6 rounded-xl border border-[color:var(--color-text)]/10 bg-[color:var(--color-surface)] p-5 animate-fade-up">
           <h3 className="text-xl font-semibold">{activeMode.title}</h3>
           <p className="mt-2 text-blue-100">{activeMode.description}</p>
         </div>

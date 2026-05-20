@@ -14,7 +14,7 @@ export function TestimonialsSection({ course }: TestimonialsSectionProps) {
         {course.testimonials.map((testimonial) => (
           <article
             key={testimonial.id}
-            className="rounded-2xl border border-white/10 bg-white/[0.04] p-5"
+            className="rounded-2xl border border-[color:var(--color-text)]/10 bg-[color:var(--color-surface)] p-5"
           >
             <div className="flex items-center gap-3">
               <Image
@@ -22,7 +22,7 @@ export function TestimonialsSection({ course }: TestimonialsSectionProps) {
                 alt={testimonial.name}
                 width={40}
                 height={40}
-                className="h-10 w-10 rounded-full border border-white/10"
+                className="h-10 w-10 rounded-full border border-[color:var(--color-text)]/10"
               />
               <div>
                 <p className="font-semibold">{testimonial.name}</p>

@@ -8,7 +8,7 @@ import { flagshipCourse } from "@/lib/course-data";
 
 export default function SuccessStoriesPage() {
   return (
-    <div className="min-h-screen bg-[#0A0F2C] text-white">
+    <div className="min-h-screen bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
       <Navbar />
 
       <main>
@@ -28,12 +28,12 @@ export default function SuccessStoriesPage() {
         <TestimonialsSection course={flagshipCourse} />
 
         <section className="mx-auto w-full max-w-6xl px-4 pb-16 sm:px-6">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center">
+          <div className="rounded-2xl border border-[color:var(--color-text)]/10 bg-[color:var(--color-surface)] p-6 text-center">
             <h2 className="text-2xl font-bold">Ready to Start?</h2>
             <p className="mt-2 text-blue-100">Join Dynamic Fast Mind and begin today.</p>
             <Link
               href="/enroll"
-              className="mt-5 inline-flex rounded-lg bg-[#3B82F6] px-6 py-3 font-semibold text-white transition hover:bg-blue-500"
+              className="mt-5 inline-flex rounded-lg bg-[color:var(--color-accent)] px-6 py-3 font-semibold text-white transition hover:opacity-90"
             >
               Enroll Now
             </Link>

@@ -3,26 +3,44 @@
 @tailwind utilities;
 
 :root {
+  /* Default (dark-ish) fallback palette */
   --color-bg: #0a0f2c;
   --color-bg-start: #13266e;
+  --color-surface: #07122b;
   --color-accent: #3b82f6;
   --color-text: #ffffff;
+  --color-muted: #9ca3af;
 }
 
 /* Light theme variables */
 :root[data-theme="light"] {
   --color-bg: #f8fafc;
-  --color-bg-start: #e0edff;
+  --color-bg-start: #eaf3ff;
+  /* cool light-blue surface to reduce harsh white */
+  --color-surface: #eef6ff;
   --color-accent: #2563eb;
   --color-text: #0b1220;
+  --color-muted: #6b7280;
+}
+
+/* Improve contrast for utility blue text classes in light theme */
+:root[data-theme="light"] [class*="text-blue-"] {
+  color: var(--color-text) !important;
+}
+
+/* Slightly darken muted blue uses where a lighter tone was used */
+:root[data-theme="light"] .text-blue-200 {
+  color: rgba(11,18,32,0.7) !important;
 }
 
 /* Dark theme variables */
 :root[data-theme="dark"] {
   --color-bg: #0a0f2c;
   --color-bg-start: #13266e;
+  --color-surface: #050816;
   --color-accent: #3b82f6;
   --color-text: #ffffff;
+  --color-muted: #9ca3af;
 }
 
 html,
@@ -50,7 +68,9 @@ h1, h2, h3 {
 }
 
 .btn-ghost {
-  @apply inline-block rounded-lg border border-white/20 text-blue-100 px-5 py-2 transition-colors duration-200;
+  @apply inline-block rounded-lg px-5 py-2 transition-colors duration-200;
+  border: 1px solid rgba(11,18,32,0.08);
+  color: var(--color-text);
 }
 
 /* subtle card lift */

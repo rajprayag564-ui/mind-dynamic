@@ -26,14 +26,14 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
   const showBack = pathname && pathname !== "/";
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0A0F2C]/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-[color:var(--color-accent)]/15 bg-[color:var(--color-bg)]/95 backdrop-blur">
       <nav className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
         <div className="flex items-center gap-3">
           {showBack ? (
             <button
               onClick={() => router.back()}
               aria-label="Go back"
-              className="mr-1 rounded-md bg-white/5 p-2 text-sm text-blue-100 hover:bg-white/10"
+              className="mr-1 rounded-md bg-[color:var(--color-accent)]/10 p-2 text-sm text-[color:var(--color-text)] hover:bg-[color:var(--color-accent)]/15"
             >
               ←
             </button>
@@ -45,9 +45,9 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
           </Link>
         </div>
 
-        <div className="hidden items-center gap-4 text-sm text-blue-100 md:flex">
+        <div className="hidden items-center gap-4 text-sm text-[color:var(--color-text)]/80 md:flex">
           {links.map((link) => (
-            <Link key={link.href} href={link.href} className="transition hover:text-white">
+            <Link key={link.href} href={link.href} className="transition hover:text-[color:var(--color-text)]">
               {link.label}
             </Link>
           ))}
@@ -56,7 +56,7 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
             <>
               <Link
                 href="/dashboard"
-                className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+                className="rounded-full border border-[color:var(--color-accent)]/20 px-4 py-2 text-sm font-semibold text-[color:var(--color-text)] transition hover:bg-[color:var(--color-accent)]/10"
               >
                 Dashboard
               </Link>
@@ -71,7 +71,7 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
             <>
               <Link
                 href="/login"
-                className="rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+                className="rounded-full border border-[color:var(--color-accent)]/20 px-4 py-2 text-sm font-semibold text-[color:var(--color-text)] transition hover:bg-[color:var(--color-accent)]/10"
               >
                 Login
               </Link>
@@ -136,14 +136,14 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
                     leaveTo="translate-x-full"
                   >
                     <Dialog.Panel className="pointer-events-auto w-screen max-w-xs">
-                      <div className="flex h-full flex-col overflow-y-auto bg-[#071033] py-6 shadow-xl">
+                      <div className="flex h-full flex-col overflow-y-auto bg-[color:var(--color-bg)] py-6 shadow-xl">
                         <div className="px-4 sm:px-6">
                           <div className="flex items-start justify-between">
-                            <h2 className="text-lg font-semibold text-white">Menu</h2>
+                            <h2 className="text-lg font-semibold text-[color:var(--color-text)]">Menu</h2>
                             <div className="ml-3 flex h-7 items-center">
                               <button
                                 onClick={() => setOpen(false)}
-                                className="rounded-md bg-white/5 p-1 text-white hover:bg-white/10"
+                                className="rounded-md bg-[color:var(--color-accent)]/10 p-1 text-[color:var(--color-text)] hover:bg-[color:var(--color-accent)]/15"
                               >
                                 Close
                               </button>
@@ -156,7 +156,7 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
                               <Link
                                 key={link.href}
                                 href={link.href}
-                                className="block rounded-md px-3 py-2 text-sm text-blue-100 hover:bg-white/5"
+                                className="block rounded-md px-3 py-2 text-sm text-[color:var(--color-text)]/80 hover:bg-[color:var(--color-accent)]/10"
                               >
                                 {link.label}
                               </Link>
@@ -164,7 +164,7 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
 
                             {isLoggedIn ? (
                               <>
-                                <Link href="/dashboard" className="block rounded-md px-3 py-2 text-sm text-white bg-white/5">
+                                <Link href="/dashboard" className="block rounded-md px-3 py-2 text-sm text-[color:var(--color-text)] bg-[color:var(--color-accent)]/10">
                                   Dashboard
                                 </Link>
                                 <Link href="/logout" className="block rounded-md px-3 py-2 text-sm text-white bg-blue-600">
@@ -173,7 +173,7 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
                               </>
                             ) : (
                               <>
-                                <Link href="/login" className="block rounded-md px-3 py-2 text-sm text-white bg-white/5">
+                                <Link href="/login" className="block rounded-md px-3 py-2 text-sm text-[color:var(--color-text)] bg-[color:var(--color-accent)]/10">
                                   Login
                                 </Link>
                                 <Link href="/enroll" className="block rounded-md px-3 py-2 text-sm text-white bg-blue-600">

@@ -17,6 +17,7 @@ export type CourseOffer = {
   priceInr: number;
   originalPriceInr: number;
   imageUrl: string;
+  bunnyVideoId: string;
 };
 
 export type FlagshipCourse = {
@@ -80,18 +81,60 @@ export const flagshipCourse: FlagshipCourse = {
   },
   courseOffers: [
     {
-      id: "offer-1",
-      title: "Mind Map",
+      id: "powerful-public-speaking",
+      title: "Powerful Public Speaking",
       priceInr: 99,
-      originalPriceInr: 199,
-        imageUrl: "/images/course-mindmap.svg",
+      originalPriceInr: 999,
+      imageUrl: "/images/course-speaking.svg",
+      bunnyVideoId: "827917b7-c678-4f79-9e2d-e3d394b0e748",
     },
     {
-      id: "offer-2",
+      id: "mind-reading",
+      title: "Mind Reading",
+      priceInr: 99,
+      originalPriceInr: 199,
+      imageUrl: "/images/course-mindreading.svg",
+      bunnyVideoId: "",
+    },
+    {
+      id: "face-reading",
+      title: "Face Reading",
+      priceInr: 99,
+      originalPriceInr: 199,
+      imageUrl: "/images/course-face-reading.svg",
+      bunnyVideoId: "",
+    },
+    {
+      id: "graphology",
+      title: "Graphology",
+      priceInr: 99,
+      originalPriceInr: 199,
+      imageUrl: "/images/course-graphology.svg",
+      bunnyVideoId: "",
+    },
+    {
+      id: "career-test-bundle",
+      title: "Career Development Test Bundle",
+      priceInr: 199,
+      originalPriceInr: 799,
+      imageUrl: "/images/course-tests-bundle.svg",
+      bunnyVideoId: "",
+    },
+    {
+      id: "motivation-learning",
       title: "Motivation Learning",
       priceInr: 99,
       originalPriceInr: 199,
-        imageUrl: "/images/course-motivation.svg",
+      imageUrl: "/images/course-motivation.svg",
+      bunnyVideoId: "",
+    },
+    {
+      id: "mind-map",
+      title: "Mind Map",
+      priceInr: 99,
+      originalPriceInr: 199,
+      imageUrl: "/images/course-mindmap.svg",
+      bunnyVideoId: "",
     },
   ],
   testimonials: [

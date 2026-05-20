@@ -52,7 +52,7 @@ export function CurriculumSection({ course }: CurriculumSectionProps) {
                 </div>
 
                 <Link
-                  href="/enroll"
+                  href={`/courses/${offer.id}`}
                   className="mt-5 inline-flex items-center gap-2 rounded-lg bg-[#3B82F6] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-500"
                 >
                   View Details

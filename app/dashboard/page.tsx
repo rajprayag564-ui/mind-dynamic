@@ -1,10 +1,35 @@
 import Link from "next/link";
 import { Lock, PlayCircle, UserCircle2 } from "lucide-react";
 import { flagshipCourse } from "@/lib/course-data";
+import { getFirestore } from "@/lib/firebase/admin";
+import { cookies } from "next/headers";
+import ProtectedPlayer from "@/components/video/ProtectedPlayer";
 
-export default function DashboardPage() {
+export const dynamic = "force-dynamic";
+
+export default async function DashboardPage() {
   const mindLessons = flagshipCourse.curriculum.mindTraining;
   const careerLessons = flagshipCourse.curriculum.careerGuidance;
+  // Get current user uid from cookie
+  const uid = cookies().get("dfm_session")?.value || null;
+  let isActive = false;
+  let lastProductId: string | null = null;
+
+  if (uid) {
+    try {
+      const db = getFirestore();
+      const q = await db.collection("purchases").where("userId", "==", uid).get();
+      if (!q.empty) {
+        const docs = q.docs.map((doc) => doc.data());
+        const activePurchase = docs.find((purchase) => purchase.status === "active") || docs[0];
+        const p = activePurchase;
+        isActive = p.status === "active";
+        lastProductId = p.productId || null;
+      }
+    } catch {
+      // ignore errors; show locked state
+    }
+  }
 
   return (
     <div className="min-h-screen bg-[#0A0F2C] text-white">
@@ -33,10 +58,8 @@ export default function DashboardPage() {
 
         <main className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 sm:p-6">
           <section className="rounded-xl border border-white/10 bg-[#0f153c] p-6">
-            <div className="flex aspect-video flex-col items-center justify-center rounded-lg border border-dashed border-white/20 bg-[#0b102f] text-center">
-              <PlayCircle className="h-12 w-12 text-[#3B82F6]" />
-              <p className="mt-3 text-lg font-semibold">Video coming soon</p>
-              <p className="mt-1 text-sm text-blue-200">Your selected lesson will appear here.</p>
+            <div>
+              <ProtectedPlayer productId={lastProductId || flagshipCourse.courseOffers[0]?.id || null} />
             </div>
           </section>
 
@@ -49,22 +72,20 @@ export default function DashboardPage() {
                   Mind Training
                 </h3>
                 <ul className="space-y-2">
-                  {mindLessons.map((lesson, index) => (
+                  {mindLessons.map((lesson) => (
                     <li
                       key={lesson.id}
                       className="flex items-center justify-between rounded-lg border border-white/10 bg-[#101943] px-4 py-3"
                     >
                       <div className="flex items-center gap-3">
-                        {index === 0 ? (
+                        {isActive ? (
                           <PlayCircle className="h-4 w-4 text-[#3B82F6]" />
                         ) : (
                           <Lock className="h-4 w-4 text-blue-300" />
                         )}
                         <span className="text-sm sm:text-base">{lesson.title}</span>
                       </div>
-                      <span className="text-xs text-blue-200">
-                        {index === 0 ? "Playing" : "Locked"}
-                      </span>
+                      <span className="text-xs text-blue-200">{isActive ? "Unlocked" : "Locked"}</span>
                     </li>
                   ))}
                 </ul>

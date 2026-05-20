@@ -22,8 +22,8 @@ export default function RootLayout({
   const setThemeScript = `try{const t=localStorage.getItem('dfm_theme');if(t){document.documentElement.setAttribute('data-theme',t);}else{const prefersDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.setAttribute('data-theme',prefersDark?'dark':'light');localStorage.setItem('dfm_theme',prefersDark?'dark':'light');}}catch(e){}`;
 
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-[#0A0F2C] text-white">
+    <html lang="en" className={`${inter.variable} h-full antialiased`} suppressHydrationWarning>
+      <body className="min-h-full flex flex-col bg-[color:var(--color-bg)] text-[color:var(--color-text)] transition-colors duration-300">
         <script dangerouslySetInnerHTML={{ __html: setThemeScript }} />
         {children}
       </body>

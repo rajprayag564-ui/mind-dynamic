@@ -6,7 +6,8 @@ import dynamic from "next/dynamic";
 const NavbarClient = dynamic(() => import("./navbar-client"), { ssr: false });
 
 export function Navbar() {
-  const isLoggedIn = cookies().get("dfm_session")?.value === "1";
+  // Consider any non-empty dfm_session cookie value (uid) as authenticated.
+  const isLoggedIn = !!cookies().get("dfm_session")?.value;
 
   return <NavbarClient isLoggedIn={isLoggedIn} />;
 }

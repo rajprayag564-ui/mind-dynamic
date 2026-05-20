@@ -36,7 +36,7 @@ export default function ThemeToggle() {
     <button
       aria-label="Toggle theme"
       onClick={toggle}
-      className="rounded-md bg-white/5 p-2 text-blue-100 hover:bg-white/10"
+      className="rounded-md bg-[color:var(--color-surface)]/90 p-2 text-[color:var(--color-text)] hover:bg-[color:var(--color-surface)]/80"
     >
       {theme === "dark" ? "🌙" : "☀️"}
     </button>

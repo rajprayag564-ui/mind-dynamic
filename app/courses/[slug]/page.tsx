@@ -13,7 +13,7 @@ export default function CoursePage({ params }: Props) {
 
   if (!course) {
     return (
-      <div className="min-h-screen bg-[#0A0F2C] text-white">
+      <div className="min-h-screen bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
         <Navbar />
         <main className="mx-auto w-full max-w-4xl px-4 py-20">
           <h1 className="text-2xl font-bold">Course not found</h1>
@@ -25,7 +25,7 @@ export default function CoursePage({ params }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0F2C] text-white">
+    <div className="min-h-screen bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
       <Navbar />
       <main className="mx-auto w-full max-w-4xl px-4 py-12 sm:py-20">
         <div className="rounded-lg bg-slate-900/40 p-8">

@@ -59,7 +59,7 @@ export default function ProtectedPlayer({ productId }: Props) {
 
   if (!productId) {
     return (
-      <div className="flex aspect-video items-center justify-center rounded-lg border border-dashed border-white/20 bg-[#0b102f] text-center">
+      <div className="flex aspect-video items-center justify-center rounded-lg border border-dashed border-[color:var(--color-text)]/20 bg-[#0b102f] text-center">
         <p className="text-sm text-blue-200">No purchase found.</p>
       </div>
     );
@@ -67,7 +67,7 @@ export default function ProtectedPlayer({ productId }: Props) {
 
   if (loading) {
     return (
-      <div className="flex aspect-video items-center justify-center rounded-lg border border-dashed border-white/20 bg-[#0b102f] text-center">
+      <div className="flex aspect-video items-center justify-center rounded-lg border border-dashed border-[color:var(--color-text)]/20 bg-[#0b102f] text-center">
         <p className="text-sm text-blue-200">Loading video…</p>
       </div>
     );
@@ -75,7 +75,7 @@ export default function ProtectedPlayer({ productId }: Props) {
 
   if (error) {
     return (
-      <div className="flex aspect-video items-center justify-center rounded-lg border border-dashed border-white/20 bg-[#0b102f] text-center">
+      <div className="flex aspect-video items-center justify-center rounded-lg border border-dashed border-[color:var(--color-text)]/20 bg-[#0b102f] text-center">
         <p className="text-sm text-rose-400">{error}</p>
       </div>
     );

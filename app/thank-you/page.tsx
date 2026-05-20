@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/landing/site-footer";
 
 export default function ThankYouPage() {
   return (
-    <div className="min-h-screen bg-[#0A0F2C] text-white">
+    <div className="min-h-screen bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
       <Navbar />
       <main className="mx-auto w-full max-w-3xl px-4 py-20 text-center">
         <h1 className="text-2xl font-bold">Thank you — Payment Submitted</h1>

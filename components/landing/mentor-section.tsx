@@ -3,7 +3,7 @@ import Image from "next/image";
 export function MentorSection() {
   return (
     <section id="mentor" className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-      <div className="grid gap-8 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 md:grid-cols-2 md:items-center md:p-8">
+      <div className="grid gap-8 overflow-hidden rounded-2xl border border-[color:var(--color-text)]/10 bg-[color:var(--color-surface)] p-6 md:grid-cols-2 md:items-center md:p-8">
         <Image
           src="/images/mentor-photo.svg"
           alt="Mentor behind Dynamic Fast Mind"

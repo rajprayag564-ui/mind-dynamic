@@ -44,12 +44,12 @@ export default function CheckoutForm({ productId, title, amount }: Props) {
   }
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+    <div className="rounded-2xl border border-[color:var(--color-text)]/10 bg-[color:var(--color-surface)]/95 p-6">
       <h2 className="text-lg font-semibold">Checkout — {title}</h2>
       <p className="mt-2 text-sm text-blue-100">Amount payable: ₹{amount}</p>
 
       <div className="mt-4 flex gap-4">
-        <div className="w-40 rounded bg-white/5 p-3 text-center">
+        <div className="w-40 rounded bg-[color:var(--color-surface)]/90 p-3 text-center">
           <img src="/images/hero-illustration.svg" alt="UPI QR" className="mx-auto h-36 w-36 object-contain" />
           <p className="mt-2 text-xs text-blue-200">Scan and pay via UPI</p>
         </div>
@@ -60,7 +60,7 @@ export default function CheckoutForm({ productId, title, amount }: Props) {
             value={utr}
             onChange={(e) => setUtr(e.target.value)}
             required
-            className="mt-1 w-full rounded-lg border border-white/15 bg-[#0b1636] px-3 py-2 text-white outline-none"
+            className="mt-1 w-full rounded-lg border border-[color:var(--color-text)]/15 bg-[color:var(--color-surface)] px-3 py-2 text-[color:var(--color-text)] outline-none"
             placeholder="Enter UTR or TXN ID"
           />
 

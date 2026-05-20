@@ -31,9 +31,9 @@ export function FeaturesSection() {
 
       <div className="mt-8 grid gap-5 md:grid-cols-3">
         {features.map((feature) => (
-          <article
-            key={feature.title}
-            className="rounded-2xl border border-white/10 bg-white/[0.04] p-6"
+            <article
+              key={feature.title}
+              className="rounded-2xl border border-[color:var(--color-text)]/10 bg-[color:var(--color-surface)] p-6"
           >
             <feature.icon className="h-8 w-8 text-[#3B82F6]" />
             <h3 className="mt-4 text-xl font-semibold">{feature.title}</h3>

@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState, Fragment } from "react";
-import ThemeToggle from "@/components/ui/ThemeToggle";
+import Link from "next/link";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { usePathname, useRouter } from "next/navigation";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [open, setOpen] = useState(false);
@@ -28,7 +28,7 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
     <header className="sticky top-0 z-40 border-b border-[color:var(--color-accent)]/15 bg-[color:var(--color-bg)]/95 backdrop-blur">
       <nav className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           {showBack ? (
             <button
               onClick={() => router.back()}
@@ -39,9 +39,18 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
             </button>
           ) : null}
 
-          <Link href="/" className="flex items-center gap-3">
-            <Image src="/logo-mark.svg" alt="DFM" width={40} height={40} />
-            <Image src="/logo.svg" alt="Dynamic Fast Mind" width={120} height={28} className="hidden md:block" />
+          <Link href="/" className="flex items-center gap-2" aria-label="Dynamic Fast Mind home">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-[color:var(--color-text)]/10 bg-[color:var(--color-surface)] shadow-sm shadow-black/5">
+              <Image src="/logo-mark.svg" alt="DFM" width={28} height={28} priority />
+            </span>
+            <span className="hidden md:flex flex-col leading-none">
+              <span className="text-[0.82rem] font-extrabold tracking-[-0.02em] text-[color:var(--color-text)]">
+                Dynamic Fast Mind
+              </span>
+              <span className="text-[0.58rem] font-medium uppercase tracking-[0.2em] text-[color:var(--color-accent)]/80">
+                Learn Fast. Think Dynamic.
+              </span>
+            </span>
           </Link>
         </div>
 
@@ -62,7 +71,7 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
               </Link>
               <Link
                 href="/logout"
-                className="rounded-full bg-[#3B82F6] px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition hover:-translate-y-0.5 hover:bg-blue-500"
+                className="rounded-full bg-[color:var(--color-accent)] px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition hover:-translate-y-0.5 hover:opacity-90"
               >
                 Logout
               </Link>
@@ -77,7 +86,7 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
               </Link>
               <Link
                 href="/enroll"
-                className="rounded-full bg-[#3B82F6] px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition hover:-translate-y-0.5 hover:bg-blue-500"
+                className="rounded-full bg-[color:var(--color-accent)] px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition hover:-translate-y-0.5 hover:opacity-90"
               >
                 Enroll Now
               </Link>
@@ -102,7 +111,7 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
             <button
               onClick={() => setOpen((s) => !s)}
               aria-label="Toggle menu"
-              className="ml-2 rounded-md bg-white/5 p-2 text-blue-100 hover:bg-white/10"
+              className="ml-2 rounded-md bg-[color:var(--color-surface)]/90 p-2 text-[color:var(--color-text)] hover:bg-[color:var(--color-surface)]/80"
             >
               {open ? "✕" : "☰"}
             </button>
@@ -150,7 +159,7 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
                             </div>
                           </div>
                         </div>
-                        <div className="mt-6 relative flex-1 px-4 sm:px-6">
+                        <div className="relative mt-6 flex-1 px-4 sm:px-6">
                           <div className="flex flex-col gap-3">
                             {links.map((link) => (
                               <Link
@@ -164,19 +173,25 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
 
                             {isLoggedIn ? (
                               <>
-                                <Link href="/dashboard" className="block rounded-md px-3 py-2 text-sm text-[color:var(--color-text)] bg-[color:var(--color-accent)]/10">
+                                <Link
+                                  href="/dashboard"
+                                  className="block rounded-md bg-[color:var(--color-accent)]/10 px-3 py-2 text-sm text-[color:var(--color-text)]"
+                                >
                                   Dashboard
                                 </Link>
-                                <Link href="/logout" className="block rounded-md px-3 py-2 text-sm text-white bg-blue-600">
+                                <Link href="/logout" className="block rounded-md bg-[color:var(--color-accent)] px-3 py-2 text-sm text-white">
                                   Logout
                                 </Link>
                               </>
                             ) : (
                               <>
-                                <Link href="/login" className="block rounded-md px-3 py-2 text-sm text-[color:var(--color-text)] bg-[color:var(--color-accent)]/10">
+                                <Link
+                                  href="/login"
+                                  className="block rounded-md bg-[color:var(--color-accent)]/10 px-3 py-2 text-sm text-[color:var(--color-text)]"
+                                >
                                   Login
                                 </Link>
-                                <Link href="/enroll" className="block rounded-md px-3 py-2 text-sm text-white bg-blue-600">
+                                <Link href="/enroll" className="block rounded-md bg-[color:var(--color-accent)] px-3 py-2 text-sm text-white">
                                   Enroll Now
                                 </Link>
                                 <a

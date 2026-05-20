@@ -18,9 +18,9 @@ export default function EnrollPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#0A0F2C] text-white">
+    <div className="min-h-screen bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
       <main className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-2">
-        <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+        <section className="rounded-2xl border border-[color:var(--color-text)]/10 bg-[color:var(--color-surface)] p-6">
           <p className="text-sm text-blue-200">Order Summary</p>
           <h1 className="mt-2 text-2xl font-bold">{flagshipCourse.title}</h1>
           <p className="mt-3 text-sm text-blue-100">{flagshipCourse.description}</p>
@@ -40,7 +40,7 @@ export default function EnrollPage() {
             </li>
           </ul>
 
-          <div className="mt-8 border-t border-white/10 pt-4">
+          <div className="mt-8 border-t border-[color:var(--color-text)]/10 pt-4">
             <div className="flex items-end gap-3">
               <span className="text-sm text-blue-200 line-through">
                 ₹{flagshipCourse.originalPriceInr}
@@ -51,7 +51,7 @@ export default function EnrollPage() {
           </div>
         </section>
 
-        <section className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+        <section className="rounded-2xl border border-[color:var(--color-text)]/10 bg-[color:var(--color-surface)] p-6">
           <h2 className="text-xl font-semibold">Complete Enrollment</h2>
           <p className="mt-1 text-sm text-blue-100">
             This is a static prototype checkout.
@@ -72,7 +72,7 @@ export default function EnrollPage() {
                 id="name"
                 name="name"
                 required
-                className="w-full rounded-lg border border-white/15 bg-[#111a46] px-3 py-2.5 outline-none transition focus:border-[#3B82F6]"
+                className="w-full rounded-lg border border-[color:var(--color-text)]/15 bg-[#111a46] px-3 py-2.5 outline-none transition focus:border-[#3B82F6]"
                 placeholder="Enter your full name"
               />
             </div>
@@ -86,14 +86,14 @@ export default function EnrollPage() {
                 name="email"
                 type="email"
                 required
-                className="w-full rounded-lg border border-white/15 bg-[#111a46] px-3 py-2.5 outline-none transition focus:border-[#3B82F6]"
+                className="w-full rounded-lg border border-[color:var(--color-text)]/15 bg-[#111a46] px-3 py-2.5 outline-none transition focus:border-[#3B82F6]"
                 placeholder="you@example.com"
               />
             </div>
 
             <button
               type="submit"
-              className="mt-2 w-full rounded-lg bg-[#3B82F6] px-4 py-3 font-semibold text-white transition hover:bg-blue-500"
+              className="mt-2 w-full rounded-lg bg-[color:var(--color-accent)] px-4 py-3 font-semibold text-white transition hover:opacity-90"
             >
               Complete Purchase
             </button>
@@ -123,7 +123,7 @@ export default function EnrollPage() {
           <DialogFooter>
             <Link
               href="/dashboard"
-              className="inline-flex w-full justify-center rounded-lg bg-[#3B82F6] px-4 py-2.5 font-semibold transition hover:bg-blue-500 sm:w-auto"
+              className="inline-flex w-full justify-center rounded-lg bg-[color:var(--color-accent)] px-4 py-2.5 font-semibold transition hover:opacity-90 sm:w-auto"
             >
               Go to Dashboard (Demo)
             </Link>

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
 import {
@@ -12,7 +11,6 @@ import {
 import { hasFirebaseClientConfig, getFirebaseAuth } from "@/lib/firebase/client";
 
 export default function LoginPage() {
-  const router = useRouter();
   const firebaseReady = hasFirebaseClientConfig();
 
   const [isSignUp, setIsSignUp] = useState(false);
@@ -27,6 +25,42 @@ export default function LoginPage() {
     setNextPath(params.get("next") || "/dashboard");
   }, []);
 
+  function setFallbackSessionCookie(uid: string) {
+    if (!uid) {
+      return;
+    }
+
+    document.cookie = `dfm_session=${encodeURIComponent(uid)}; path=/; max-age=${60 * 60 * 24 * 7}; samesite=lax`;
+  }
+
+  async function completeAuthRedirect() {
+    const auth = getFirebaseAuth();
+    const uid = auth?.currentUser?.uid || "";
+
+    try {
+      const idToken = await auth?.currentUser?.getIdToken(true);
+      if (idToken) {
+        const response = await fetch("/api/auth/session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idToken }),
+        });
+
+        if (!response.ok && uid) {
+          setFallbackSessionCookie(uid);
+        }
+      } else if (uid) {
+        setFallbackSessionCookie(uid);
+      }
+    } catch {
+      if (uid) {
+        setFallbackSessionCookie(uid);
+      }
+    }
+
+    window.location.assign(nextPath);
+  }
+
   async function handleAuth(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setErrorMessage("");
@@ -39,24 +73,7 @@ export default function LoginPage() {
         await loginWithEmailPassword(email, password);
       }
 
-      // attempt to fetch an idToken from the client and send it to the server
-      try {
-        const auth = getFirebaseAuth();
-        const idToken = await auth?.currentUser?.getIdToken();
-        if (idToken) {
-          await fetch("/api/auth/session", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ idToken }),
-          });
-        } else {
-          await fetch("/api/auth/session", { method: "POST" });
-        }
-      } catch {
-        await fetch("/api/auth/session", { method: "POST" });
-      }
-
-      router.push(nextPath);
+      await completeAuthRedirect();
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
@@ -74,22 +91,8 @@ export default function LoginPage() {
 
     try {
       await loginWithGoogle();
-      try {
-        const auth = getFirebaseAuth();
-        const idToken = await auth?.currentUser?.getIdToken();
-        if (idToken) {
-          await fetch("/api/auth/session", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ idToken }),
-          });
-        } else {
-          await fetch("/api/auth/session", { method: "POST" });
-        }
-      } catch {
-        await fetch("/api/auth/session", { method: "POST" });
-      }
-      router.push(nextPath);
+
+      await completeAuthRedirect();
     } catch (error) {
       if (error instanceof Error) {
         setErrorMessage(error.message);
@@ -102,7 +105,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0F2C] text-white">
+    <div className="min-h-screen bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
       <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-4 py-10 sm:px-6">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-blue-200">
           Secure Access
@@ -122,7 +125,7 @@ export default function LoginPage() {
 
         <form
           onSubmit={handleAuth}
-          className="mt-7 rounded-2xl border border-white/10 bg-white/[0.04] p-5"
+          className="mt-7 rounded-2xl border border-[color:var(--color-text)]/10 bg-[color:var(--color-surface)] p-5"
         >
           <div className="space-y-4">
             <div className="space-y-1.5">
@@ -136,7 +139,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 disabled={!firebaseReady}
-                className="w-full rounded-lg border border-white/15 bg-[#111a46] px-3 py-2.5 outline-none transition focus:border-[#3B82F6]"
+                className="w-full rounded-lg border border-[color:var(--color-text)]/15 bg-[#111a46] px-3 py-2.5 outline-none transition focus:border-[#3B82F6]"
                 placeholder="you@example.com"
               />
             </div>
@@ -153,7 +156,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 disabled={!firebaseReady}
-                className="w-full rounded-lg border border-white/15 bg-[#111a46] px-3 py-2.5 outline-none transition focus:border-[#3B82F6]"
+                className="w-full rounded-lg border border-[color:var(--color-text)]/15 bg-[#111a46] px-3 py-2.5 outline-none transition focus:border-[#3B82F6]"
                 placeholder="Minimum 6 characters"
               />
             </div>
@@ -166,7 +169,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isLoading || !firebaseReady}
-            className="mt-5 w-full rounded-lg bg-[#3B82F6] px-4 py-2.5 font-semibold text-white transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-70"
+            className="mt-5 w-full rounded-lg bg-[color:var(--color-accent)] px-4 py-2.5 font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
           >
             {isLoading
               ? "Please wait..."
@@ -179,7 +182,7 @@ export default function LoginPage() {
             type="button"
             onClick={handleGoogleLogin}
             disabled={isLoading || !firebaseReady}
-            className="mt-3 w-full rounded-lg border border-white/20 bg-transparent px-4 py-2.5 font-semibold text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-70"
+            className="mt-3 w-full rounded-lg border border-[color:var(--color-text)]/20 bg-transparent px-4 py-2.5 font-semibold text-white transition hover:bg-[color:var(--color-surface)]/80 disabled:cursor-not-allowed disabled:opacity-70"
           >
             Continue with Google
           </button>

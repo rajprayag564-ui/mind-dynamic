@@ -29,7 +29,7 @@ export default function CheckoutPage({ searchParams }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0F2C] text-white">
+    <div className="min-h-screen bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
       <Navbar />
       <main className="mx-auto w-full max-w-6xl px-4 py-12">
         <h1 className="text-2xl font-bold">Checkout</h1>

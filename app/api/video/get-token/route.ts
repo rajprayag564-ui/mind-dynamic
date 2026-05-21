@@ -3,7 +3,7 @@ import { getFirestore } from "@/lib/firebase/admin";
 import crypto from "crypto";
 import { flagshipCourse } from "@/lib/course-data";
 
-type Body = { courseId: string };
+type Body = { courseId: string; lessonId?: string };
 
 export async function POST(request: Request) {
   try {
@@ -26,9 +26,20 @@ export async function POST(request: Request) {
     if (q.empty) return NextResponse.json({ message: "Forbidden" }, { status: 403 });
 
     const course = flagshipCourse.courseOffers.find((offer) => offer.id === body.courseId);
-    const videoId = course?.bunnyVideoId?.trim() || null;
-    if (!course || !videoId) {
-      return NextResponse.json({ message: "Missing Bunny video mapping" }, { status: 500 });
+    if (!course) return NextResponse.json({ message: "Course not found" }, { status: 404 });
+
+    let videoId: string | null = null;
+    // Prefer lesson-level mapping when lessonId provided
+    if (body.lessonId && Array.isArray(course.lessons)) {
+      const lesson = course.lessons.find((l) => l.id === body.lessonId);
+      if (lesson && lesson.bunnyVideoId) videoId = lesson.bunnyVideoId.trim();
+    }
+
+    // Fallback to course-level bunnyVideoId for backward compatibility
+    if (!videoId) videoId = course?.bunnyVideoId?.trim() || null;
+
+    if (!videoId) {
+      return NextResponse.json({ message: "Missing Bunny video mapping for requested lesson" }, { status: 500 });
     }
 
     const libraryId = process.env.BUNNY_VIDEO_LIBRARY_ID;

@@ -1,0 +1,29 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="0.5" stop-color="#1D4ED8"/>
+      <stop offset="1" stop-color="#0EA5E9"/>
+    </linearGradient>
+    <radialGradient id="g2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(910 150) rotate(90) scale(520 520)">
+      <stop stop-color="#7DD3FC" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#7DD3FC" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" rx="48" fill="url(#g1)"/>
+  <circle cx="970" cy="150" r="300" fill="url(#g2)"/>
+  <circle cx="180" cy="660" r="190" fill="#38BDF8" fill-opacity="0.14"/>
+  <rect x="92" y="86" width="316" height="56" rx="28" fill="#F8FAFC" fill-opacity="0.16"/>
+  <text x="124" y="124" fill="#E0F2FE" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="4">DYNAMIC FAST MIND</text>
+  <text x="92" y="292" fill="#E0F2FE" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="800">Powerful Public</text>
+  <text x="92" y="378" fill="#E0F2FE" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="800">Speaking</text>
+  <text x="94" y="440" fill="#BFDBFE" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="600">Live classes, story craft, voice control, stage confidence</text>
+  <rect x="92" y="520" width="220" height="66" rx="33" fill="#FFFFFF" fill-opacity="0.16" stroke="#DBEAFE" stroke-opacity="0.25"/>
+  <text x="134" y="562" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">7 Day Program</text>
+  <path d="M770 494C827 494 875 542 875 599C875 656 827 704 770 704H608C551 704 503 656 503 599C503 542 551 494 608 494H770Z" fill="#0B1120" fill-opacity="0.42" stroke="#E0F2FE" stroke-opacity="0.18"/>
+  <path d="M626 529H751C769 529 784 544 784 562V635C784 653 769 668 751 668H626C608 668 593 653 593 635V562C593 544 608 529 626 529Z" fill="#E0F2FE" fill-opacity="0.14"/>
+  <path d="M645 549L733 598L645 647V549Z" fill="#F8FAFC"/>
+  <rect x="841" y="588" width="140" height="140" rx="70" fill="#22D3EE" fill-opacity="0.18"/>
+  <path d="M900 625C918 625 932 639 932 657V669H868V657C868 639 882 625 900 625Z" fill="#F8FAFC"/>
+  <path d="M900 592C911 592 920 601 920 612C920 623 911 632 900 632C889 632 880 623 880 612C880 601 889 592 900 592Z" fill="#F8FAFC"/>
+</svg>

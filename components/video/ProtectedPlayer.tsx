@@ -4,58 +4,81 @@ import { useEffect, useState } from "react";
 
 type Props = {
   productId: string | null;
+  lessonId?: string | null;
 };
 
-export default function ProtectedPlayer({ productId }: Props) {
+type TokenResponse = {
+  token?: string;
+  expires?: number;
+  libraryId?: string;
+  videoId?: string;
+  message?: string;
+};
+
+export default function ProtectedPlayer({ productId, lessonId }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [embedSrc, setEmbedSrc] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!productId) {
-      setError("No purchase found");
-      return;
-    }
+    let cancelled = false;
 
     async function fetchToken() {
+      if (!productId) {
+        setError("No purchase found");
+        return;
+      }
+
       setLoading(true);
       setError(null);
+
       try {
+        const body: { courseId: string; lessonId?: string } = { courseId: productId };
+        if (lessonId) body.lessonId = lessonId;
+
         const res = await fetch("/api/video/get-token", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "same-origin",
-          body: JSON.stringify({ courseId: productId }),
+          body: JSON.stringify(body),
         });
 
         if (res.status === 403) {
-          setError("Access denied");
-          return;
+          throw new Error("Access denied");
         }
 
+        const data = (await res.json().catch(() => ({}))) as TokenResponse;
         if (!res.ok) {
-          const body = await res.json().catch(() => ({}));
-          throw new Error(body?.message || "Server error");
+          throw new Error(data.message || "Server error");
         }
 
-        const data = await res.json();
         const { token, expires, libraryId, videoId } = data;
         if (!token || !expires || !libraryId || !videoId) {
           throw new Error("Invalid token response");
         }
 
         const src = `https://iframe.mediadelivery.net/embed/${libraryId}/${videoId}?token=${token}&expires=${expires}`;
-        setEmbedSrc(src);
+        if (!cancelled) {
+          setEmbedSrc(src);
+        }
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : String(err);
-        setError(message || "Failed to get token");
+        if (!cancelled) {
+          const message = err instanceof Error ? err.message : String(err);
+          setError(message || "Failed to get token");
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     }
 
     fetchToken();
-  }, [productId]);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [lessonId, productId]);
 
   if (!productId) {
     return (

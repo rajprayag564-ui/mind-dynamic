@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { Navbar } from "@/components/landing/navbar";
 import { SiteFooter } from "@/components/landing/site-footer";
@@ -9,6 +10,51 @@ import { Lock, PlayCircle } from "lucide-react";
 type Props = {
   params: { slug: string };
 };
+
+export function generateMetadata({ params }: Props): Metadata {
+  const course = flagshipCourse.courseOffers.find((c) => c.id === params.slug);
+
+  if (!course) {
+    return {
+      title: "Course Not Found",
+      description: "The requested course page does not exist.",
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
+  const seoTitle = `${course.title} Course`;
+  const seoDescription = course.description;
+  const pageUrl = `/courses/${course.id}`;
+
+  return {
+    title: seoTitle,
+    description: seoDescription,
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title: seoTitle,
+      description: seoDescription,
+      url: pageUrl,
+      type: "article",
+      images: [
+        {
+          url: course.imageUrl,
+          alt: course.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seoTitle,
+      description: seoDescription,
+      images: [course.imageUrl],
+    },
+  };
+}
 
 export default function CoursePage({ params }: Props) {
   const slug = params.slug;

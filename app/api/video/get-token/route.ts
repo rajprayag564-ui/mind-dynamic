@@ -1,18 +1,28 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import { getFirestore } from "@/lib/firebase/admin";
 import crypto from "crypto";
 import { flagshipCourse } from "@/lib/course-data";
 
 type Body = { courseId: string; lessonId?: string };
 
+function getSessionUid() {
+  const raw = cookies().get("dfm_session")?.value;
+  if (!raw) return null;
+
+  try {
+    return decodeURIComponent(raw);
+  } catch {
+    return raw;
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const body: Body = await request.json();
     if (!body?.courseId) return NextResponse.json({ message: "Missing courseId" }, { status: 400 });
 
-    const cookieHeader = request.headers.get("cookie") || "";
-    const match = cookieHeader.match(/dfm_session=([^;;\s]+)/);
-    const uid = match ? match[1] : null;
+    const uid = getSessionUid();
     if (!uid) return NextResponse.json({ message: "Unauthenticated" }, { status: 401 });
 
     const db = getFirestore();

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -8,10 +8,62 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Dynamic Fast Mind | Learn Fast. Think Dynamic.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "https://dynamicfastmind.com"),
+  title: {
+    default: "Dynamic Fast Mind | Learn Fast. Think Dynamic.",
+    template: "%s | Dynamic Fast Mind",
+  },
   description:
-    "A premium single-program learning funnel for Dynamic Fast Mind.",
-  viewport: 'width=device-width, initial-scale=1',
+    "Dynamic Fast Mind helps students learn faster, improve memory recall, and build confident communication through structured online training.",
+  keywords: [
+    "dynamic fast mind",
+    "public speaking course",
+    "student learning program",
+    "memory improvement course",
+    "focus training for students",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    title: "Dynamic Fast Mind | Learn Fast. Think Dynamic.",
+    description:
+      "Structured online training to build focus, memory, and communication confidence for students.",
+    siteName: "Dynamic Fast Mind",
+    images: [
+      {
+        url: "/images/hero-illustration.svg",
+        width: 1200,
+        height: 630,
+        alt: "Dynamic Fast Mind training platform",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Dynamic Fast Mind | Learn Fast. Think Dynamic.",
+    description:
+      "Structured online training to build focus, memory, and communication confidence for students.",
+    images: ["/images/hero-illustration.svg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

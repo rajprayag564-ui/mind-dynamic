@@ -30,7 +30,8 @@ export default function LoginPage() {
       return;
     }
 
-    document.cookie = `dfm_session=${encodeURIComponent(uid)}; path=/; max-age=${60 * 60 * 24 * 7}; samesite=lax`;
+    const secure = window.location.protocol === "https:" ? "; secure" : "";
+    document.cookie = `dfm_session=${encodeURIComponent(uid)}; path=/; max-age=${60 * 60 * 24 * 7}; samesite=lax${secure}`;
   }
 
   async function completeAuthRedirect() {

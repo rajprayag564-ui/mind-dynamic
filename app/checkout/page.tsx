@@ -33,7 +33,7 @@ export default function CheckoutPage({ searchParams }: Props) {
       <Navbar />
       <main className="mx-auto w-full max-w-6xl px-4 py-12">
         <h1 className="text-2xl font-bold">Checkout</h1>
-        <p className="mt-2 text-sm text-blue-100">Pay via UPI and submit your transaction ID for manual verification.</p>
+        <p className="mt-2 text-sm text-blue-100">Pay securely with Razorpay. Your purchase will activate automatically after confirmation.</p>
 
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
           <CheckoutForm productId={productId} title={product!.title} amount={product!.priceInr} />

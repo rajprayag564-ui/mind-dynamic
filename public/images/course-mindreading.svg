@@ -1,0 +1,22 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111827"/>
+      <stop offset="0.5" stop-color="#7C3AED"/>
+      <stop offset="1" stop-color="#EC4899"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" rx="48" fill="url(#g1)"/>
+  <circle cx="980" cy="130" r="240" fill="#F9A8D4" fill-opacity="0.18"/>
+  <circle cx="120" cy="120" r="120" fill="#A78BFA" fill-opacity="0.12"/>
+  <text x="96" y="140" fill="#F5F3FF" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="4">DYNAMIC FAST MIND</text>
+  <text x="92" y="290" fill="#F5F3FF" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="800">Mind Reading</text>
+  <text x="92" y="360" fill="#F3E8FF" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="600">Patterns, intuition, and fast observation skills</text>
+  <rect x="92" y="520" width="250" height="66" rx="33" fill="#FFFFFF" fill-opacity="0.16" stroke="#F3E8FF" stroke-opacity="0.22"/>
+  <text x="132" y="562" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Preview Course</text>
+  <path d="M720 486C806 486 876 556 876 642C876 693 834 735 783 735H657C606 735 564 693 564 642C564 556 634 486 720 486Z" fill="#0B1023" fill-opacity="0.46" stroke="#F5F3FF" stroke-opacity="0.18"/>
+  <path d="M670 538H770C790 538 806 554 806 574V655C806 675 790 691 770 691H670C650 691 634 675 634 655V574C634 554 650 538 670 538Z" fill="#F5F3FF" fill-opacity="0.15"/>
+  <path d="M692 560C692 549 700 541 711 541H729C740 541 748 549 748 560V561H692V560Z" fill="#F5F3FF"/>
+  <path d="M683 596H759" stroke="#F5F3FF" stroke-opacity="0.8" stroke-width="12" stroke-linecap="round"/>
+  <path d="M683 636H733" stroke="#F5F3FF" stroke-opacity="0.8" stroke-width="12" stroke-linecap="round"/>
+</svg>

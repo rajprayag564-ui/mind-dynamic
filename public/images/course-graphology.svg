@@ -1,0 +1,21 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="0.5" stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" rx="48" fill="url(#g1)"/>
+  <circle cx="1020" cy="160" r="220" fill="#FDBA74" fill-opacity="0.18"/>
+  <circle cx="180" cy="650" r="200" fill="#C084FC" fill-opacity="0.16"/>
+  <text x="92" y="140" fill="#FFF7ED" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="4">DYNAMIC FAST MIND</text>
+  <text x="92" y="290" fill="#FFF7ED" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="800">Graphology</text>
+  <text x="92" y="360" fill="#FFEDD5" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="600">Handwriting signals, personality traits, and practice labs</text>
+  <rect x="92" y="520" width="246" height="66" rx="33" fill="#FFFFFF" fill-opacity="0.14" stroke="#FFF7ED" stroke-opacity="0.22"/>
+  <text x="129" y="562" fill="#F8FAFC" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Course Preview</text>
+  <path d="M760 490C834 490 894 550 894 624C894 668 858 704 814 704H706C662 704 626 668 626 624C626 550 686 490 760 490Z" fill="#111827" fill-opacity="0.34" stroke="#FFF7ED" stroke-opacity="0.15"/>
+  <path d="M700 548H820" stroke="#FFF7ED" stroke-width="14" stroke-linecap="round"/>
+  <path d="M696 592H804" stroke="#FFF7ED" stroke-width="14" stroke-linecap="round"/>
+  <path d="M710 636H770" stroke="#FFF7ED" stroke-width="14" stroke-linecap="round"/>
+</svg>

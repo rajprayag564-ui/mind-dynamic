@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import { getFirestore, serverTimestamp } from "@/lib/firebase/admin";
 import { flagshipCourse } from "@/lib/course-data";
 
@@ -7,6 +8,17 @@ type Body = {
   utr: string;
 };
 
+function getSessionUid() {
+  const raw = cookies().get("dfm_session")?.value;
+  if (!raw) return null;
+
+  try {
+    return decodeURIComponent(raw);
+  } catch {
+    return raw;
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const body: Body = await request.json();
@@ -14,9 +26,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "Missing fields" }, { status: 400 });
     }
 
-    const cookieHeader = request.headers.get("cookie") || "";
-    const match = cookieHeader.match(/dfm_session=([^;;\s]+)/);
-    const uid = match ? match[1] : null;
+    const uid = getSessionUid();
     if (!uid) return NextResponse.json({ message: "Unauthenticated" }, { status: 401 });
 
     const product = flagshipCourse.courseOffers.find((p) => p.id === body.productId);

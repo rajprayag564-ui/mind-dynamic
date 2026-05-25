@@ -69,12 +69,14 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
               >
                 Dashboard
               </Link>
-              <Link
-                href="/logout"
-                className="rounded-full bg-[color:var(--color-accent)] px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition hover:-translate-y-0.5 hover:opacity-90"
-              >
-                Logout
-              </Link>
+              <form action="/logout" method="post">
+                <button
+                  type="submit"
+                  className="rounded-full bg-[color:var(--color-accent)] px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition hover:-translate-y-0.5 hover:opacity-90"
+                >
+                  Logout
+                </button>
+              </form>
             </>
           ) : (
             <>
@@ -179,9 +181,11 @@ export default function NavbarClient({ isLoggedIn }: { isLoggedIn: boolean }) {
                                 >
                                   Dashboard
                                 </Link>
-                                <Link href="/logout" className="block rounded-md bg-[color:var(--color-accent)] px-3 py-2 text-sm text-white">
-                                  Logout
-                                </Link>
+                                <form action="/logout" method="post">
+                                  <button type="submit" className="block w-full rounded-md bg-[color:var(--color-accent)] px-3 py-2 text-left text-sm text-white">
+                                    Logout
+                                  </button>
+                                </form>
                               </>
                             ) : (
                               <>

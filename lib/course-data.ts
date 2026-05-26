@@ -102,9 +102,9 @@ const flagshipPublicSpeakingCourse: CourseOffer = {
   ],
   lessons: [...coreConceptsLessons, ...advancedTutorialLessons],
   pdfs: [
-    { id: "core-concepts-guide", title: "Core Concepts Guide", url: "/downloads/core-concepts-guide.pdf" },
-    { id: "advanced-tutorials-workbook", title: "Advanced Tutorials Workbook", url: "/downloads/advanced-tutorials-workbook.pdf" },
-    { id: "speaker-practice-notes", title: "Speaker Practice Notes", url: "/downloads/speaker-practice-notes.pdf" },
+    { id: "arunima-dashrath-hinglish-storytelling", title: "Inspirational Storytelling Speeches", url: "/downloads/arunima_dashrath_hinglish_storytelling.pdf" },
+    { id: "seven-days-powerful-public-speaking-course", title: "7 Days Powerful Public Speaking Course", url: "/downloads/7_Days_Powerful_Public_Speaking_Course.pdf" },
+    { id: "public-speaking-tutorial-7-days", title: "7 Days Powerful Public Speaking Tutorial", url: "/downloads/Public_Speaking_Tutorial_7_Days.pdf" },
   ],
 };
 

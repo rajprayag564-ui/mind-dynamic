@@ -5,7 +5,6 @@ import { FormEvent, useEffect, useState } from "react";
 
 import {
   loginWithEmailPassword,
-  loginWithGoogle,
   signUpWithEmailPassword,
 } from "@/lib/firebase/auth";
 import { hasFirebaseClientConfig, getFirebaseAuth } from "@/lib/firebase/client";
@@ -86,24 +85,7 @@ export default function LoginPage() {
     }
   }
 
-  async function handleGoogleLogin() {
-    setErrorMessage("");
-    setIsLoading(true);
-
-    try {
-      await loginWithGoogle();
-
-      await completeAuthRedirect();
-    } catch (error) {
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-      } else {
-        setErrorMessage("Google sign-in failed. Please try again.");
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  
 
   return (
     <div className="min-h-screen bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
@@ -179,14 +161,7 @@ export default function LoginPage() {
                 : "Login"}
           </button>
 
-          <button
-            type="button"
-            onClick={handleGoogleLogin}
-            disabled={isLoading || !firebaseReady}
-            className="mt-3 w-full rounded-lg border border-[color:var(--color-text)]/20 bg-transparent px-4 py-2.5 font-semibold text-white transition hover:bg-[color:var(--color-surface)]/80 disabled:cursor-not-allowed disabled:opacity-70"
-          >
-            Continue with Google
-          </button>
+          {/* Google sign-in removed per request */}
 
           <button
             type="button"

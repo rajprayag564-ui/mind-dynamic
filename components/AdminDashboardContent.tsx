@@ -21,7 +21,7 @@ type Stats = {
   totalRevenue: number;
 };
 
-export default function AdminDashboardContent() {
+export default function AdminDashboardContent({ userId }: { userId: string }) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [stats, setStats] = useState<Stats>({
     total: 0,

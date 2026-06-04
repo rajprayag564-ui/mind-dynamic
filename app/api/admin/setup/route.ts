@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     const body = await request.json().catch(() => ({}));
     const setupKey = body?.setupKey;
 
-    const expectedKey = process.env.NEXT_PUBLIC_ADMIN_SETUP_KEY;
+    const expectedKey = process.env.ADMIN_SETUP_KEY;
     if (!expectedKey || setupKey !== expectedKey) {
       return NextResponse.json({ message: "Invalid or missing setup key" }, { status: 403 });
     }

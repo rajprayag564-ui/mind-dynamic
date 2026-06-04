@@ -12,7 +12,7 @@ export async function isUserAdmin(uid: string): Promise<boolean> {
     }
 
     // Check if email is in admin email list
-    const adminEmails = process.env.NEXT_PUBLIC_ADMIN_EMAILS?.split(",").map((e) => e.trim()) || [];
+    const adminEmails = process.env.ADMIN_EMAILS?.split(",").map((e) => e.trim()) || [];
     if (user?.email && adminEmails.includes(user.email)) {
       return true;
     }

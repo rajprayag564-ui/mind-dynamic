@@ -21,6 +21,7 @@ type Stats = {
   totalRevenue: number;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function AdminDashboardContent({ userId }: { userId: string }) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [stats, setStats] = useState<Stats>({

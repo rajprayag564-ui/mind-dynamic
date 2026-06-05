@@ -23,18 +23,43 @@ export default async function DashboardPage() {
   }
 
   let isActive = false;
+  let isPending = false;
+  let isRejected = false;
 
   try {
     const db = getFirestore();
-    const q = await db
-      .collection("purchases")
+
+    // Check for approved transaction (new UPI flow)
+    const transactionQuery = await db
+      .collection("transactions")
       .where("userId", "==", uid)
-      .where("productId", "==", productId)
-      .where("status", "==", "active")
+      .where("courseTitle", "==", activeCourse.title)
       .limit(1)
       .get();
 
-    isActive = !q.empty;
+    if (!transactionQuery.empty) {
+      const transactionStatus = transactionQuery.docs[0].data().status;
+      if (transactionStatus === "approved") {
+        isActive = true;
+      } else if (transactionStatus === "pending") {
+        isPending = true;
+      } else if (transactionStatus === "rejected") {
+        isRejected = true;
+      }
+    }
+
+    // Fallback: check old purchases collection
+    if (!isActive && !isPending && !isRejected) {
+      const purchaseQuery = await db
+        .collection("purchases")
+        .where("userId", "==", uid)
+        .where("productId", "==", productId)
+        .where("status", "==", "active")
+        .limit(1)
+        .get();
+
+      isActive = !purchaseQuery.empty;
+    }
   } catch {
     isActive = false;
   }
@@ -43,7 +68,43 @@ export default async function DashboardPage() {
     <div className="min-h-screen bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
       <Navbar />
       <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:py-10">
-        {!isActive ? (
+        {isRejected ? (
+          <section className="mx-auto flex max-w-3xl flex-col items-center rounded-3xl border border-red-400/20 bg-red-400/10 px-6 py-12 text-center shadow-[0_20px_60px_rgba(0,0,0,0.18)] sm:px-10">
+            <div className="mb-4 inline-flex rounded-full border border-red-400/20 bg-red-400/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-red-200">
+              Payment Rejected
+            </div>
+            <h1 className="text-3xl font-bold sm:text-4xl">Payment Denied</h1>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-red-100">
+              Your payment has been rejected by the admin. Kripya dobara se try karein ya admin se contact karein.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/checkout?productId=powerful-public-speaking"
+                className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-500"
+              >
+                Retry Payment
+              </Link>
+            </div>
+          </section>
+        ) : isPending ? (
+          <section className="mx-auto flex max-w-3xl flex-col items-center rounded-3xl border border-yellow-400/20 bg-yellow-400/10 px-6 py-12 text-center shadow-[0_20px_60px_rgba(0,0,0,0.18)] sm:px-10">
+            <div className="mb-4 inline-flex rounded-full border border-yellow-400/20 bg-yellow-400/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-yellow-200">
+              Pending Admin Approval
+            </div>
+            <h1 className="text-3xl font-bold sm:text-4xl">Payment Under Review</h1>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-yellow-100">
+              Aapka payment admin ke paas review ke liye bheja gaya hai. Admin approve karne ke baad aap videos dekh sakte hoge. Kripya wait karein...
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/courses"
+                className="inline-flex items-center justify-center rounded-xl border border-yellow-400/30 bg-yellow-400/10 px-6 py-3 font-semibold text-yellow-100 transition hover:bg-yellow-400/20"
+              >
+                Back to Courses
+              </Link>
+            </div>
+          </section>
+        ) : !isActive ? (
           <section className="mx-auto flex max-w-3xl flex-col items-center rounded-3xl border border-[color:var(--color-text)]/10 bg-[color:var(--color-surface)] px-6 py-12 text-center shadow-[0_20px_60px_rgba(0,0,0,0.18)] sm:px-10">
             <div className="mb-4 inline-flex rounded-full border border-amber-400/20 bg-amber-400/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-amber-200">
               Purchase Required

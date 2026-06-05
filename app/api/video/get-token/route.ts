@@ -26,17 +26,36 @@ export async function POST(request: Request) {
     if (!uid) return NextResponse.json({ message: "Unauthenticated" }, { status: 401 });
 
     const db = getFirestore();
-    const q = await db
-      .collection("purchases")
-      .where("userId", "==", uid)
-      .where("productId", "==", body.courseId)
-      .where("status", "==", "active")
-      .limit(1)
-      .get();
-    if (q.empty) return NextResponse.json({ message: "Forbidden" }, { status: 403 });
 
+    // Get course info to find course title
     const course = flagshipCourse.courseOffers.find((offer) => offer.id === body.courseId);
     if (!course) return NextResponse.json({ message: "Course not found" }, { status: 404 });
+
+    // Check for approved transaction (manual UPI payment flow)
+    const transactionQuery = await db
+      .collection("transactions")
+      .where("userId", "==", uid)
+      .where("courseTitle", "==", course.title)
+      .where("status", "==", "approved")
+      .limit(1)
+      .get();
+
+    // Fallback: also check old purchases collection for backward compatibility
+    let hasPurchase = !transactionQuery.empty;
+    if (!hasPurchase) {
+      const purchaseQuery = await db
+        .collection("purchases")
+        .where("userId", "==", uid)
+        .where("productId", "==", body.courseId)
+        .where("status", "==", "active")
+        .limit(1)
+        .get();
+      hasPurchase = !purchaseQuery.empty;
+    }
+
+    if (!hasPurchase) {
+      return NextResponse.json({ message: "Forbidden: Payment not approved by admin" }, { status: 403 });
+    }
 
     let videoId: string | null = null;
     // Prefer lesson-level mapping when lessonId provided

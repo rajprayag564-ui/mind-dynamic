@@ -1,11 +1,35 @@
 import Image from "next/image";
 import Link from "next/link";
+import { cookies } from "next/headers";
 import { Navbar } from "@/components/landing/navbar";
 import { SiteFooter } from "@/components/landing/site-footer";
 import { flagshipCourse } from "@/lib/course-data";
 
-export default function CoursesPage() {
+export const dynamic = "force-dynamic";
+
+async function getCourseStatus(uid: string | null, courseTitle: string) {
+  if (!uid) return "none";
+
+  try {
+    const { getFirestore: getDb } = await import("@/lib/firebase/admin");
+    const db = getDb();
+    const snapshot = await db
+      .collection("transactions")
+      .where("userId", "==", uid)
+      .where("courseTitle", "==", courseTitle)
+      .limit(1)
+      .get();
+
+    if (snapshot.empty) return "none";
+    return snapshot.docs[0].data().status || "none";
+  } catch {
+    return "none";
+  }
+}
+
+export default async function CoursesPage() {
   const courses = flagshipCourse.courseOffers;
+  const uid = cookies().get("dfm_session")?.value || null;
 
   return (
     <div className="min-h-screen bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
@@ -24,10 +48,11 @@ export default function CoursesPage() {
 
         <section className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {courses.map((course) => {
+            {courses.map(async (course) => {
               const isFeatured = course.status === "active";
               const lessonCount = course.lessons.length;
               const resourceCount = course.pdfs.length;
+              const transactionStatus = await getCourseStatus(uid, course.title);
 
               return (
                 <article
@@ -90,24 +115,43 @@ export default function CoursesPage() {
                       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                         {isFeatured ? (
                           <>
-                            <Link
-                              href="/courses/powerful-public-speaking"
-                              className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
-                            >
-                              View Details
-                            </Link>
-                            <Link
-                              href="/checkout?productId=powerful-public-speaking"
-                              className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-500"
-                            >
-                              Buy Now
-                            </Link>
-                            <Link
-                              href="/checkout?productId=powerful-public-speaking"
-                              className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
-                            >
-                              Enroll
-                            </Link>
+                            {transactionStatus === "none" ? (
+                              <>
+                                <Link
+                                  href="/courses/powerful-public-speaking"
+                                  className="inline-flex items-center justify-center rounded-xl border border-white/15 bg-white/5 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
+                                >
+                                  View Details
+                                </Link>
+                                <Link
+                                  href="/checkout?productId=powerful-public-speaking"
+                                  className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-500"
+                                >
+                                  Buy Now
+                                </Link>
+                              </>
+                            ) : transactionStatus === "pending" ? (
+                              <button
+                                disabled
+                                className="inline-flex items-center justify-center rounded-xl bg-yellow-600/50 px-6 py-3 font-semibold text-yellow-100 cursor-not-allowed"
+                              >
+                                ⏳ Pending Admin Approval
+                              </button>
+                            ) : transactionStatus === "approved" ? (
+                              <Link
+                                href="/dashboard"
+                                className="inline-flex items-center justify-center rounded-xl bg-green-600 px-6 py-3 font-semibold text-white transition hover:bg-green-500"
+                              >
+                                ✓ Already Purchased
+                              </Link>
+                            ) : (
+                              <button
+                                disabled
+                                className="inline-flex items-center justify-center rounded-xl bg-red-600/50 px-6 py-3 font-semibold text-red-100 cursor-not-allowed"
+                              >
+                                ✗ Payment Rejected
+                              </button>
+                            )}
                           </>
                         ) : (
                           <button

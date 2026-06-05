@@ -38,6 +38,21 @@ export async function POST(request: Request) {
     }
 
     const db = getFirestore();
+
+    // Check for duplicate UTR number
+    const existingUtr = await db
+      .collection("transactions")
+      .where("utrNumber", "==", body.utrNumber)
+      .limit(1)
+      .get();
+
+    if (!existingUtr.empty) {
+      return NextResponse.json(
+        { message: "This UTR number has already been submitted. Each UTR can only be used once." },
+        { status: 409 }
+      );
+    }
+
     const transactionRef = db.collection("transactions").doc();
     const transactionId = transactionRef.id;
 

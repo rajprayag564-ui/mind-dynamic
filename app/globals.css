@@ -33,6 +33,16 @@
   color: rgba(11,18,32,0.7) !important;
 }
 
+/* Ensure checkout/payment form inputs always have dark bg + white text */
+:root[data-theme="light"] input#utr {
+  background-color: #111827 !important;
+  color: #ffffff !important;
+  border-color: #4b5563 !important;
+}
+:root[data-theme="light"] input#utr::placeholder {
+  color: #6b7280 !important;
+}
+
 /* Dark theme variables */
 :root[data-theme="dark"] {
   --color-bg: #0a0f2c;

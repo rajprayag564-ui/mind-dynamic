@@ -7,6 +7,7 @@ type Body = {
   price: number;
   utrNumber: string;
   status: string;
+  userUpiId?: string;
 };
 
 function getSessionUid() {
@@ -63,6 +64,7 @@ export async function POST(request: Request) {
       price: body.price,
       utrNumber: body.utrNumber,
       status: body.status,
+      userUpiId: body.userUpiId || null,
       createdAt: serverTimestamp(),
     });
 

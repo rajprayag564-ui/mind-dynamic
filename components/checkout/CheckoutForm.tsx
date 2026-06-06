@@ -11,6 +11,7 @@ type Props = {
 
 export default function CheckoutForm({ title, amount }: Props) {
   const [utrNumber, setUtrNumber] = useState("");
+  const [userUpiId, setUserUpiId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -39,6 +40,7 @@ export default function CheckoutForm({ title, amount }: Props) {
           courseTitle: title,
           price: amount,
           utrNumber,
+          userUpiId,
           status: "pending",
         }),
       });
@@ -81,6 +83,44 @@ export default function CheckoutForm({ title, amount }: Props) {
             </code>
           </p>
           <p className="mt-2 text-xs text-blue-300/70">Scan the QR code or enter the UPI ID manually in your UPI app and pay exactly ₹{amount}</p>
+        </div>
+
+        {/* Dynamic UPI Intent */}
+        <div className="rounded-xl border border-indigo-500/20 bg-indigo-950/30 p-4">
+          <label htmlFor="userUpiId" className="block text-sm font-semibold mb-2 text-blue-100">
+            💳 Pay directly via your UPI App
+          </label>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <input
+              id="userUpiId"
+              type="text"
+              value={userUpiId}
+              onChange={(e) => setUserUpiId(e.target.value.trim())}
+              placeholder="Enter your UPI ID (e.g. name@bank)"
+              className="flex-1 rounded-lg border-2 border-gray-600 bg-gray-900 px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 focus:outline-none transition-all"
+              disabled={isLoading || success}
+            />
+            <a
+              href={userUpiId ? `upi://pay?pa=anantmamta26@oksbi&pn=Mamta%20Anant&am=${amount}&cu=INR` : "#"}
+              onClick={(e) => {
+                if (!userUpiId) {
+                  e.preventDefault();
+                  return;
+                }
+              }}
+              className={`w-full sm:w-auto rounded-lg bg-indigo-600 px-6 py-2.5 text-sm font-semibold text-white text-center transition hover:bg-indigo-500 whitespace-nowrap inline-block ${
+                !userUpiId || isLoading || success ? "opacity-50 pointer-events-none" : ""
+              }`}
+            >
+              Pay ₹{amount} via UPI
+            </a>
+          </div>
+          <p className="mt-2 text-xs text-blue-300/70">
+            📱 Mobile par apna UPI ID daale aur button click kare — aapki payment app me ₹{amount} pre-filled aa jayega. Payment ke baad neeche UTR number paste kare.
+          </p>
+          <p className="mt-1 text-xs text-yellow-400/70">
+            ⚠️ Desktop par yeh feature kaam nahi karega. Please apne mobile se is page ko kholein ya oopar QR code scan karein.
+          </p>
         </div>
 
         {/* UTR Input Form */}
